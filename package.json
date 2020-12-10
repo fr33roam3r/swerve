@@ -26,5 +26,7 @@
     "eslint": "^7.15.0",
     "uglify-js": "^3.12.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "webrtc-adapter": "^7.7.0"
+  }
 }

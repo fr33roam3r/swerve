@@ -3,6 +3,9 @@
 */
 'use strict';
 console.log('Hooking Requirements...');
+const adapter = require('webrtc-adapter');
+console.log(adapter.browserDetails.browser);
+console.log(adapter.browserDetails.version);
 const fs = require('fs');
 
 
