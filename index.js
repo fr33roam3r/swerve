@@ -1,43 +1,43 @@
-/*
-#!/usr/bin/env node
-*/
 'use strict';
-console.log('Hooking Requirements...');
+
 const adapter = require('webrtc-adapter');
 console.log(adapter.browserDetails.browser);
 console.log(adapter.browserDetails.version);
-const fs = require('fs');
+
+// const fs = require('fs');
+// Keeping 'fs' Node library to show where and what to write concerning uploading/downloading
 
 
 
 // MAIN
+function main (args) {
 
-// Initialize Connection
-const rtc = new RTCPeerConnection();
-console.log('RTCPeerConnection: ' + rtc);
+	// Initialize Connection
+	const rtc = new RTCPeerConnection();
 
-// Determine Mode
-console.log('Begin.');
-if (process.env === ('-c' || '--client')) {
-	console.log('Mode: Client');
-	client();
-} else if (process.env[0] === ('-s' || '--server')) {
-	console.log('Mode: Server');
-		if (process.env[1] === 'recieve') {
+	// Determine Mode
+	console.log('Begin.');
+	if (args[0] === ('-c' || '--client')) {
+		console.log('Mode: Client');
+		client();
+	} else if (args[0] === ('-s' || '--server')) {
+		console.log('Mode: Server');
+		if (args[1] === 'recieve') {
 			serverRecieve();
-		} else if (process.env[1] === 'send') {
+		} else if (args[1] === 'send') {
 			serverSend();
 		} else {
 			console.log('Undefined Server Argument');
 		}
-} else if (process.env[0] === ('-h' || '--help')) {
-	help();
-} else {
-	console.log('Mode Undefined');
-}
+	}  else {
+		console.log('Mode Undefined');
+	}
 
-// END OF MAIN
-console.log('Finished.');
+	// END OF MAIN
+	console.log('Finished.');
+
+	return;
+}
 
 
 
@@ -66,7 +66,7 @@ function serverSend () {
 	// Prepare Data
 	let token = rtc.createOffer();
 	console.log('Offer: ' + token);
-	fs.writeFile('serverSendICE.txt', localDescription(token));
+	// fs.writeFile('serverSendICE.txt', localDescription(token));
 
 	return;
 }
@@ -77,12 +77,12 @@ function client () {
 	let session = new RTCSessionDescription(fs.readFile('serverSendICE.txt'));
 	let remoteSession = remoteDescription(session);
 	console.log('remoteSession: ' + remoteSession);
-	fs.writeFile('clientKeepICE.txt', localDescription(token));
+	// fs.writeFile('clientKeepICE.txt', localDescription(token));
 
 	// Prepare Data
 	let token = rtc.createAnswer();
 	console.log('Answer: ' + token);
-	fs.writeFile('clientSendICE.txt', localDescription(token));
+	// fs.writeFile('clientSendICE.txt', localDescription(token));
 
 	return;
 }
@@ -91,21 +91,7 @@ function serverRecieve() {
 
 	// Recieve Data
 	let session = new RTCSessionDescription(fs.readFile('clientSendICE.txt'));
-	fs.writeFile('serverKeepICE.txt', remoteDescription(session));
+	// fs.writeFile('serverKeepICE.txt', remoteDescription(session));
 
 	return;
-}
-
-function help () {
-
-	console.log('node index.js <ARGUMENTS>');
-	console.log('');
-	console.log('-s, --server (send/recieve)');
-	console.log('send & recieve do not use "--"s');
-	console.log('');
-	console.log('-c, --client');
-	console.log('');
-	console.log('-h, --help');
-
-	return;
-}
+} 

@@ -4,13 +4,7 @@
   "description": "Serverless webRTC version.",
   "main": "index.js",
   "scripts": {
-    "build": "uglifyjs index.js -c -o index.min.js --verbose --warn",
-    "check": "npx eslint index.js",
-    "clean": "rm serverSendICE.txt serverKeepICE.txt clientSendICE.txt clientKeepICE.txt",
-    "help": "node index.js -h",
-    "start-client": "node index.js -c",
-    "start-serverSend": "node index.js -s send",
-    "start-serverRecieve": "node index.js -s recieve"
+    "build": "npx browserify index.js -o main.js && uglifyjs main.js -c -o index.min.js --verbose --warn"
   },
   "keywords": [
     "html",
@@ -23,7 +17,7 @@
   "author": "fr33roam3r",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
-    "eslint": "^7.15.0",
+    "browserify": "^17.0.0",
     "uglify-js": "^3.12.1"
   },
   "dependencies": {
