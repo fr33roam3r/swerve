@@ -67,6 +67,7 @@ function serverSend () {
 	let token = rtc.createOffer();
 	console.log('Offer: ' + token);
 	// fs.writeFile('serverSendICE.txt', localDescription(token));
+	downloadString(localDescription(token), "text/csv", "serverSendICE.txt");
 
 	return;
 }
@@ -78,11 +79,13 @@ function client () {
 	let remoteSession = remoteDescription(session);
 	console.log('remoteSession: ' + remoteSession);
 	// fs.writeFile('clientKeepICE.txt', localDescription(token));
+	downloadString(localDescription(token), "text/csv", "clientKeepICE.txt");
 
 	// Prepare Data
 	let token = rtc.createAnswer();
 	console.log('Answer: ' + token);
 	// fs.writeFile('clientSendICE.txt', localDescription(token));
+	downloadString(localDescription(token), "text/csv", "clientSendICE.txt");
 
 	return;
 }
@@ -92,6 +95,20 @@ function serverRecieve() {
 	// Recieve Data
 	let session = new RTCSessionDescription(fs.readFile('clientSendICE.txt'));
 	// fs.writeFile('serverKeepICE.txt', remoteDescription(session));
+	downloadString(remoteDescription(session), "text/csv", "serverKeepICE.txt");
 
 	return;
 } 
+
+
+function downloadString(text, fileType, fileName) {
+  var blob = new Blob([text], { type: fileType });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.dataset.downloadurl = [fileType, fileName, a.href].join(':');
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+	return;
+}
