@@ -1,0 +1,2 @@
+*.json linguist-language=JSON
+logbook.json linguist-vendored=false
