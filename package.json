@@ -4,7 +4,7 @@
   "description": "Serverless webRTC version.",
   "main": "index.js",
   "scripts": {
-    "build": "npx browserify index.js -o main.js && uglifyjs main.js -c -o index.min.js --verbose --warn"
+    "test": "echo 'No scripts defined.'"
   },
   "keywords": [
     "html",
@@ -16,11 +16,8 @@
   ],
   "author": "fr33roam3r",
   "license": "GPL-3.0-or-later",
-  "devDependencies": {
-    "browserify": "^17.0.0",
-    "uglify-js": "^3.12.1"
-  },
   "dependencies": {
+    "get-browser-rtc": "^1.1.0",
     "webrtc-adapter": "^7.7.0"
   }
 }
