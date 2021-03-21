@@ -8,6 +8,11 @@ Why?
 
 This project is different from other repositories with WebRTC because our goal is to establish a connection without using a signaling server. In addition, this project focuses on just live text chats rather than video streams.
 
+Usage
+-
+
+This project is a template to give way for others to come up with their own parodies, so `index.js` is meant to be utilized by including the entire file. In addition, it comes with `logbook.json`, which is a storage for users' network information & connections. This is simply so a signal can be maintained long-term (see [#2](https://github.com/F1nx/swerve/issues/2)).
+
 Functionality
 -
 
