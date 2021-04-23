@@ -1,7 +1,14 @@
 'use strict';
 
 // Initialize
-const adapter = require('webrtc-adapter');
+// If script cannot use Node, Deno, or Browser to link adapter, then exit
+var adapter = require('webrtc-adapter') || (import * from 'https://webrtc.github.io/adapter/adapter-latest.js');
+if (!adapter) {
+	adapter = document.createElement("SCRIPT") || (console.err('CANNOT FIND RTC ADAPTER') && (window.stop() || process.exit()));
+	adapter.type = 'text/javascript';
+	adapter.src = 'https://webrtc.github.io/adapter/adapter-latest.js';
+	document.body.appendChild(adapter);
+}
 console.log(adapter.browserDetails.browser);
 console.log(adapter.browserDetails.version);
 const rtc = new RTCPeerConnection();
